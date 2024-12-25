@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "512604907175",
+    "project_id": "bolosewu-57e7c",
+    "storage_bucket": "bolosewu-57e7c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:512604907175:android:7de00f4e3649c26e785d82",
+        "android_client_info": {
+          "package_name": "com.example.bolosewu"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeahOqHMKXve3aDC9EI4I6ODfHnJH7bZw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
