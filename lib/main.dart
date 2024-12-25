@@ -20,10 +20,32 @@ class MyApp extends StatelessWidget {
       home: const WidgetTree(),
       theme: ThemeData(
         textTheme: TextTheme(
+          titleLarge: TextStyle(
+              color: Colors.black,
+              fontSize: 24,
+              fontWeight: FontWeight.w400
+          ),
+          titleMedium: TextStyle(
+              color: Colors.purple,
+              fontSize: 20,
+              fontWeight: FontWeight.w600
+          ),
           bodyMedium: TextStyle(
             color: Colors.black,
+            fontSize: 14,
+            fontWeight: FontWeight.w400,
           ),
-
+          displayMedium: TextStyle(
+            color: Colors.purple,
+          ),
+        ),
+        colorScheme: ColorScheme.light(
+          primary: Colors.white,
+          secondary: Colors.purple,
+          primaryContainer: Colors.white,
+          secondaryContainer: Colors.purple,
+          surface: Colors.white,
+          onSurface: Colors.black54,
         ),
       ),
     );

@@ -12,7 +12,12 @@ class _PulsaPageState extends State<PulsaPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Pulsa'),),
+      appBar: AppBar(
+        title: Text(
+          'Pulsa',
+          style: Theme.of(context).textTheme.titleMedium,
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: ListView(
@@ -40,11 +45,11 @@ class _PulsaPageState extends State<PulsaPage> {
         height: 70,
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Theme.of(context).colorScheme.primaryContainer,
           borderRadius: BorderRadius.circular(15),
           border: Border.all(
               width: 1,
-              color: Colors.grey
+              color: Theme.of(context).colorScheme.secondaryContainer,
           ),
           // boxShadow: [
           //   BoxShadow(

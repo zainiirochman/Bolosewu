@@ -36,7 +36,11 @@ class _HomePageState extends State<HomePage> {
       length: 3, // Number of tabs
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Bolosewu'),
+          title: Text(
+            'Bolosewu',
+            style: Theme.of(context).textTheme.titleLarge
+          ),
+          backgroundColor: Colors.white,
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(200.0),
             child: Column(
@@ -77,22 +81,20 @@ class _HomePageState extends State<HomePage> {
           child: ListView(
             padding: EdgeInsets.zero,
             children: <Widget>[
-              // Header Drawer
               DrawerHeader(
-                decoration: const BoxDecoration(
-                  color: Colors.blue,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.secondary,
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const CircleAvatar(
+                    CircleAvatar(
                       radius: 30,
-                      backgroundColor: Colors.white,
                       child: Icon(
                         Icons.person,
                         size: 40,
-                        color: Colors.blue,
+                        color: Theme.of(context).colorScheme.secondary,
                       ),
                     ),
                     const SizedBox(height: 10),
@@ -107,12 +109,11 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
               ),
-              // Menu Items
               ListTile(
                 leading: const Icon(Icons.home),
                 title: const Text('Home'),
                 onTap: () {
-                  Navigator.pop(context); // Close drawer
+                  Navigator.pop(context);
                 },
               ),
               ListTile(
@@ -120,7 +121,6 @@ class _HomePageState extends State<HomePage> {
                 title: const Text('Settings'),
                 onTap: () {
                   Navigator.pop(context);
-                  // Navigate to settings page or perform any action
                 },
               ),
               ListTile(
@@ -128,10 +128,15 @@ class _HomePageState extends State<HomePage> {
                 title: const Text('About'),
                 onTap: () {
                   Navigator.pop(context);
-                  // Navigate to about page or perform any action
                 },
               ),
-              const Divider(), // Separator
+              Divider(
+                  height: 20,
+                  indent: 20,
+                  endIndent: 20,
+                  color: Theme.of(context).colorScheme.onSurface,
+                ),
+              // Separator
               ListTile(
                 leading: const Icon(Icons.logout),
                 title: const Text('Logout'),
