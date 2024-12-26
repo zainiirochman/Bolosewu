@@ -1,6 +1,7 @@
 import 'package:bolosewu/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -13,9 +14,20 @@ class _LoginPageState extends State<LoginPage> {
   String? errorMessage = '';
   bool isLogin = true;
   bool _obscureText = true;
+  bool _isLoading = false;
 
   final TextEditingController _controllerEmail = TextEditingController();
   final TextEditingController _controllerPassword = TextEditingController();
+
+  Future <void> _loginGoogle() async {
+    setState(() {
+      _isLoading = true;
+    });
+    await Auth().signInWithGoogle();
+    setState(() {
+      _isLoading = false;
+    });
+  }
 
   void _toggleObscureText() {
     setState(() {
@@ -47,18 +59,6 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  Widget _entryField(
-      String title,
-      TextEditingController controller,
-      ){
-    return TextField(
-      controller: controller,
-      decoration: InputDecoration(
-        labelText: title,
-      ),
-    );
-  }
-
   Widget _errorMessage (){
     return Text(errorMessage == '' ? '' : 'Humm? $errorMessage');
   }
@@ -67,7 +67,8 @@ class _LoginPageState extends State<LoginPage> {
     return ElevatedButton(
       onPressed: isLogin ? signInWithEmailAndPassword : createUserWithEmailAndPassword,
       child: Text(
-        isLogin ? 'Login' : 'Register'
+        isLogin ? 'Login' : 'Register',
+        style: Theme.of(context).textTheme.displayMedium,
       ),
     );
   }
@@ -78,7 +79,8 @@ class _LoginPageState extends State<LoginPage> {
         isLogin = !isLogin;
       });},
       child: Text(
-        isLogin ? 'Register Instead' : 'Login Instead'
+        isLogin ? 'Register Instead' : 'Login Instead',
+        style: Theme.of(context).textTheme.displayMedium,
       ),
     );
   }
@@ -102,7 +104,7 @@ class _LoginPageState extends State<LoginPage> {
                   hintText: 'Username',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30.0),
-                  )
+                  ),
                 ),
               ),
               SizedBox(height: 20,),
@@ -124,6 +126,28 @@ class _LoginPageState extends State<LoginPage> {
               _errorMessage(),
               _submitButton(),
               _loginOrRegisterButton(),
+              GestureDetector(
+                onTap: () {_loginGoogle();},
+                child: Container(
+                  width: 200,
+                  height: 50,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20)
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        FontAwesomeIcons.google,
+                        color: Colors.lightGreenAccent,
+                      ),
+                      SizedBox(width: 20,),
+                      Text('Login With Google'),
+                    ],
+                  ),
+                ),
+              ),
             ],
           ),
         ),

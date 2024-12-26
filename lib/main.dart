@@ -37,6 +37,8 @@ class MyApp extends StatelessWidget {
           ),
           displayMedium: TextStyle(
             color: Colors.purple,
+            fontSize: 14,
+            fontWeight: FontWeight.w400,
           ),
         ),
         colorScheme: ColorScheme.light(

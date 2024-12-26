@@ -78,6 +78,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         drawer: Drawer(
+          width: 250,
           child: ListView(
             padding: EdgeInsets.zero,
             children: <Widget>[

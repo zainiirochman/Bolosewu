@@ -5,7 +5,6 @@ class TripayAPI {
   final String apiKey = 'YOUR_TRIPAY_API_KEY'; // Ganti dengan API Key Tripay
   final String baseUrl = 'https://tripay.co.id/api';
 
-  // Mendapatkan metode pembayaran
   Future<List<dynamic>> getPaymentChannels() async {
     final url = Uri.parse('$baseUrl/merchant/payment-channel');
     final response = await http.get(url, headers: {'Authorization': 'Bearer $apiKey'});
@@ -16,7 +15,6 @@ class TripayAPI {
     }
   }
 
-  // Membuat transaksi
   Future<Map<String, dynamic>> createTransaction(
       {required String method, required String amount, required String userEmail}) async {
     final url = Uri.parse('$baseUrl/transaction/create');
