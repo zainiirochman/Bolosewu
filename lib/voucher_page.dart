@@ -1,4 +1,4 @@
-import 'package:bolosewu/top_up_page.dart';
+import 'package:bolosewu/pay_pulsa.dart';
 import 'package:flutter/material.dart';
 
 class VoucherPage extends StatefulWidget {
@@ -36,7 +36,7 @@ class _VoucherPageState extends State<VoucherPage> {
       onTap: (){
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => TopUpPage()),
+          MaterialPageRoute(builder: (context) => PayPulsa()),
         );
       },
       child: Container(

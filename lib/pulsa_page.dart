@@ -1,4 +1,4 @@
-import 'package:bolosewu/top_up_page.dart';
+import 'package:bolosewu/pay_pulsa.dart';
 import 'package:flutter/material.dart';
 
 class PulsaPage extends StatefulWidget {
@@ -38,7 +38,7 @@ class _PulsaPageState extends State<PulsaPage> {
       onTap: (){
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => TopUpPage()),
+          MaterialPageRoute(builder: (context) => PayPulsa()),
         );
       },
       child: Container(

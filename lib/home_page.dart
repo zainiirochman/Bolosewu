@@ -1,5 +1,6 @@
 import 'package:bolosewu/auth.dart';
 import 'package:bolosewu/games_page.dart';
+import 'package:bolosewu/history_page.dart';
 import 'package:bolosewu/pulsa_page.dart';
 import 'package:bolosewu/voucher_page.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -7,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({super.key});
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -92,10 +93,14 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     CircleAvatar(
                       radius: 30,
-                      child: Icon(
-                        Icons.person,
-                        size: 40,
-                        color: Theme.of(context).colorScheme.secondary,
+                      backgroundColor: Colors.white,
+                      child: ClipOval(
+                        child: Image.network(
+                          '${Auth().currentUser?.photoURL}',
+                          fit: BoxFit.cover,
+                          width: 60,
+                          height: 60,
+                        ),
                       ),
                     ),
                     const SizedBox(height: 10),
@@ -125,10 +130,10 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
               ListTile(
-                leading: const Icon(Icons.info),
-                title: const Text('About'),
+                leading: const Icon(Icons.history),
+                title: const Text('History'),
                 onTap: () {
-                  Navigator.pop(context);
+                  Navigator.push(context, MaterialPageRoute(builder: (context) =>HistoryPage(),));
                 },
               ),
               Divider(

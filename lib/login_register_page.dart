@@ -87,6 +87,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
         child: Padding(
@@ -126,11 +127,29 @@ class _LoginPageState extends State<LoginPage> {
               _errorMessage(),
               _submitButton(),
               _loginOrRegisterButton(),
-              GestureDetector(
-                onTap: () {_loginGoogle();},
+              // Row(
+              //   children: [
+              //     Divider(
+              //       height: 20,
+              //       indent: 20,
+              //       endIndent: 20,
+              //       color: Colors.black,
+              //     ),
+              //     Text("or"),
+              //     Divider(
+              //       height: 20,
+              //       indent: 20,
+              //       endIndent: 20,
+              //       color: Theme.of(context).colorScheme.onSurface,
+              //     ),
+              //   ],
+              // ),
+              ElevatedButton(
+                onPressed: () {_loginGoogle();},
                 child: Container(
-                  width: 200,
+                  // width: 200,
                   height: 50,
+                  width: size.width,
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(20)
@@ -140,10 +159,13 @@ class _LoginPageState extends State<LoginPage> {
                     children: [
                       Icon(
                         FontAwesomeIcons.google,
-                        color: Colors.lightGreenAccent,
+                        color: Theme.of(context).colorScheme.secondary,
                       ),
                       SizedBox(width: 20,),
-                      Text('Login With Google'),
+                      Text(
+                        'Login With Google',
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
                     ],
                   ),
                 ),
