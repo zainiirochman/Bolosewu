@@ -1,4 +1,4 @@
-import 'package:bolosewu/pay_pulsa.dart';
+import 'package:bolosewu/payment_page.dart';
 import 'package:flutter/material.dart';
 
 class PulsaPage extends StatefulWidget {
@@ -22,23 +22,23 @@ class _PulsaPageState extends State<PulsaPage> {
         padding: const EdgeInsets.all(8.0),
         child: ListView(
           children: [
-            _buildPulsaTiles('assets/images/telkomsel.png', 'Telkomsel'),
+            _buildPulsaTiles('assets/images/telkomsel.png', 'Telkomsel', 'telkomsel'),
             SizedBox(height: 20,),
-            _buildPulsaTiles('assets/images/xl.png', 'XL'),
+            _buildPulsaTiles('assets/images/xl.png', 'XL', 'xl'),
             SizedBox(height: 20,),
-            _buildPulsaTiles('assets/images/indosat.png', 'Indosat')
+            _buildPulsaTiles('assets/images/indosat.png', 'Indosat', 'indosat')
           ],
         ),
       ),
     );
   }
 
-  Widget _buildPulsaTiles (String imagePath, String name){
+  Widget _buildPulsaTiles (String imagePath, String productName, String productCode){
     return InkWell(
       onTap: (){
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => PayPulsa()),
+          MaterialPageRoute(builder: (context) => PaymentPage(productName: productName, productCode: productCode,)),
         );
       },
       child: Container(
@@ -70,7 +70,7 @@ class _PulsaPageState extends State<PulsaPage> {
                 child: Image.asset(imagePath),
               ),
               SizedBox(width: 10,),
-              Text(name),
+              Text(productName),
             ],
           ),
         ),

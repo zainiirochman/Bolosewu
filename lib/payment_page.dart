@@ -6,14 +6,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 
-class PayPulsa extends StatefulWidget {
-  const PayPulsa({super.key});
+class PaymentPage extends StatefulWidget {
+  const PaymentPage({super.key,
+    required this.productName,
+    required this.productCode,
+  });
+  final String productName;
+  final String productCode;
 
   @override
-  State<PayPulsa> createState() => _PayPulsaState();
+  State<PaymentPage> createState() => _PaymentPageState();
 }
 
-class _PayPulsaState extends State<PayPulsa> {
+class _PaymentPageState extends State<PaymentPage> {
   final TextEditingController _amountController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   List<dynamic> _paymentChannels = [];
@@ -54,9 +59,6 @@ class _PayPulsaState extends State<PayPulsa> {
       };
 
       documentReference.set(transactionData).then((_) {
-        // ScaffoldMessenger.of(context).showSnackBar(
-        //   SnackBar(content: Text("Data berhasil disimpan!")),
-        // );
       }).catchError((error) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text("Gagal menyimpan data: $error")),
@@ -97,7 +99,7 @@ class _PayPulsaState extends State<PayPulsa> {
     final url = Uri.parse('https://api.sandbox.midtrans.com/v2/charge');
     final headers = {
       'Content-Type': 'application/json',
-      'Authorization': 'Basic ${base64Encode(utf8.encode('SB-Mid-server-r1A1xBVL7ChuK9GTKFlyg2sr'))}',
+      'Authorization': 'Basic ${base64Encode(utf8.encode('YOUR KEY'))}',
     };
 
     final body = {
@@ -112,10 +114,10 @@ class _PayPulsaState extends State<PayPulsa> {
         },
       "item_details": [
         {
-          "id": "pulsa-${int.parse(amount)}",
+          "id": "${widget.productCode}-${int.parse(amount)}",
           "price": int.parse(amount),
           "quantity": 1,
-          "name": "Pulsa Telkomsel"
+          "name": "${widget.productName}"
         }
       ],
       "customer_details": {

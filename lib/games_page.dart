@@ -1,4 +1,4 @@
-import 'package:bolosewu/pay_pulsa.dart';
+import 'package:bolosewu/payment_page.dart';
 import 'package:flutter/material.dart';
 
 class GamesPage extends StatefulWidget {
@@ -22,23 +22,23 @@ class _GamesPageState extends State<GamesPage> {
         padding: const EdgeInsets.all(8.0),
         child: ListView(
           children: [
-            _buildGamesTiles('assets/images/mobileLegends.png', 'Mobile Legends'),
+            _buildGamesTiles('assets/images/mobileLegends.png', 'Mobile Legends', 'ml'),
             SizedBox(height: 20,),
-            _buildGamesTiles('assets/images/freeFire.png', 'Free Fire'),
+            _buildGamesTiles('assets/images/freeFire.png', 'Free Fire', 'ff'),
             SizedBox(height: 20,),
-            _buildGamesTiles('assets/images/pubg.png', 'PUBG Mobile')
+            _buildGamesTiles('assets/images/pubg.png', 'PUBG Mobile', 'pubg')
           ],
         ),
       ),
     );
   }
 
-  Widget _buildGamesTiles (String imagePath, String name){
+  Widget _buildGamesTiles (String imagePath, String productName, String productCode){
     return InkWell(
       onTap: (){
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => PayPulsa()),
+          MaterialPageRoute(builder: (context) => PaymentPage(productName: productName, productCode: productCode,)),
         );
       },
       child: Container(
@@ -70,7 +70,7 @@ class _GamesPageState extends State<GamesPage> {
                 child: Image.asset(imagePath),
               ),
               SizedBox(width: 10,),
-              Text(name),
+              Text(productName),
             ],
           ),
         ),

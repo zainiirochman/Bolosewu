@@ -1,4 +1,4 @@
-import 'package:bolosewu/pay_pulsa.dart';
+import 'package:bolosewu/payment_page.dart';
 import 'package:flutter/material.dart';
 
 class VoucherPage extends StatefulWidget {
@@ -23,7 +23,7 @@ class _VoucherPageState extends State<VoucherPage> {
         padding: const EdgeInsets.all(8.0),
         child: ListView(
           children: [
-            _buildVoucherTiles('assets/images/googlePlay.png', 'Google Play'),
+            _buildVoucherTiles('assets/images/googlePlay.png', 'Google Play', 'gplay'),
             SizedBox(height: 20,),
           ],
         ),
@@ -31,12 +31,12 @@ class _VoucherPageState extends State<VoucherPage> {
     );
   }
 
-  Widget _buildVoucherTiles (String imagePath, String name){
+  Widget _buildVoucherTiles (String imagePath, String productName, String productCode){
     return InkWell(
       onTap: (){
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => PayPulsa()),
+          MaterialPageRoute(builder: (context) => PaymentPage(productName: productName, productCode: productCode,)),
         );
       },
       child: Container(
@@ -68,7 +68,7 @@ class _VoucherPageState extends State<VoucherPage> {
                 child: Image.asset(imagePath),
               ),
               SizedBox(width: 10,),
-              Text(name),
+              Text(productName),
             ],
           ),
         ),
