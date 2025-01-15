@@ -1,12 +1,12 @@
 # bolosewu
 
-A new Flutter project.
+Bolosewu adalah aplikasi topup games, voucher, dan pulsa.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+Project ini dibagun bersama flutter.
 
-A few resources to get you started if this is your first Flutter project:
+Flutter starter pack here :
 
 - [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
 - [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
