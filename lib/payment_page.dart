@@ -43,6 +43,7 @@ class _PaymentPageState extends State<PaymentPage> {
   void createData(String paymentStatus, String orderIdNya){
     String amountNya = _amountController.text;
     String phoneNya = _phoneController.text;
+    String metodeNya = _selectedChannel!;
 
     if (amountNya.isEmpty || phoneNya.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -56,6 +57,8 @@ class _PaymentPageState extends State<PaymentPage> {
         "phone": phoneNya,
         "status":paymentStatus,
         "orderId":orderIdNya,
+        "metode" : metodeNya,
+        "va": "-",
       };
 
       documentReference.set(transactionData).then((_) {
@@ -99,7 +102,7 @@ class _PaymentPageState extends State<PaymentPage> {
     final url = Uri.parse('https://api.sandbox.midtrans.com/v2/charge');
     final headers = {
       'Content-Type': 'application/json',
-      'Authorization': 'Basic ${base64Encode(utf8.encode('YOUR KEY'))}',
+      'Authorization': 'Basic ${base64Encode(utf8.encode('SB-Mid-server-r1A1xBVL7ChuK9GTKFlyg2sr'))}',
     };
 
     final body = {
@@ -140,7 +143,7 @@ class _PaymentPageState extends State<PaymentPage> {
 
         final selectedChannel = _paymentChannels.firstWhere(
               (channel) => channel['code'] == paymentCode,);
-        _updateTransactionStatusInFirestore(orderId, "Pending");
+        _updateTransactionStatusInFirestore(orderId, "Pending", vaNumber);
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
@@ -201,8 +204,9 @@ class _PaymentPageState extends State<PaymentPage> {
       if (response.statusCode == 200) {
         final responseData = json.decode(response.body);
         final transactionStatus = responseData['transaction_status'];
+        final vaNumber = responseData['va_numbers']?[0]['va_number'];
 
-        await _updateTransactionStatusInFirestore(orderId, transactionStatus);
+        await _updateTransactionStatusInFirestore(orderId, transactionStatus, vaNumber);
 
         if (transactionStatus == 'settlement') {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -254,14 +258,17 @@ class _PaymentPageState extends State<PaymentPage> {
     }
   }
 
-  Future<void> _updateTransactionStatusInFirestore(String orderId, String status) async {
+  Future<void> _updateTransactionStatusInFirestore(String orderId, String status, String vaNum) async {
     try {
       final userCollection = FirebaseFirestore.instance.collection("${Auth().currentUser?.uid}");
 
       final querySnapshot = await userCollection.where("orderId", isEqualTo: orderId).get();
 
       if (querySnapshot.docs.isNotEmpty) {
-        await querySnapshot.docs.first.reference.update({"status": status});
+        await querySnapshot.docs.first.reference.update({
+          "status": status,
+          "va": vaNum,
+        });
       }
     } catch (error) {
       print("Gagal memperbarui status di Firestore: $error");

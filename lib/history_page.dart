@@ -1,6 +1,7 @@
 import 'package:bolosewu/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/services.dart';
 
 class HistoryPage extends StatelessWidget {
 
@@ -73,7 +74,8 @@ class HistoryPage extends StatelessWidget {
               final amount = data['amount'] ?? "-";
               final phone = data['phone'] ?? "-";
               final status = data['status'] ?? "-";
-
+              final metode = data['metode'] ??"-";
+              final va = data['va'] ??"-";
               return Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Card(
@@ -84,6 +86,40 @@ class HistoryPage extends StatelessWidget {
                       status,
                     ),
                     onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: Text('Detail Transaksi'),
+                          content: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text('Metode: ${metode}'),
+                              if (va != null) Row(
+                                children: [
+                                  Text('VA: $va'),
+                                  IconButton(
+                                    icon: Icon(Icons.copy),
+                                    onPressed: () async {
+                                      await Clipboard.setData(ClipboardData(text: '$va'));
+                                    },
+                                  ),
+                                ],
+                              ),
+                              Text('Nominal: Rp $amount'),
+                              Text('Status Pembayaran : $status')
+                            ],
+                          ),
+                          actions: [
+                            ElevatedButton(
+                              onPressed: () => Navigator.pop(context),
+                              child: Text(
+                                'Tutup',
+                                style: Theme.of(context).textTheme.displayMedium,
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
                       // Navigator.push(
                       //   context,
                       //   MaterialPageRoute(
